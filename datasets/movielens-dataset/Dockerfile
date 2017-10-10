@@ -1,4 +1,5 @@
-FROM ubuntu:14.04
+FROM arm64v8/ubuntu:16.04
+
 
 # Download datasets
 RUN BUILD_DEPS="curl unzip" \

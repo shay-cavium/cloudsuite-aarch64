@@ -1,22 +1,22 @@
-FROM ubuntu:14.04
+FROM arm64v8/ubuntu:16.04
+
 
 # Install dependencies
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
       curl \
-      openjdk-7-jdk \
+      openjdk-8-jdk \
       rsync \
       ssh \
     && rm -rf /var/lib/apt/lists/*
 
-ENV HADOOP_VERSION 2.7.3
+ENV HADOOP_VERSION 2.7.4
 ENV HADOOP_PREFIX /opt/hadoop-${HADOOP_VERSION}
 ENV HADOOP_CONF_DIR ${HADOOP_PREFIX}/etc/hadoop
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-arm64
 
 # Install Hadoop
 RUN set -x \
-    && MIRROR=$(curl -s http://www.apache.org/dyn/closer.lua?as_json=1 | grep preferred | awk '{print $2}' | sed -e 's/"//g') \
-    && URL=${MIRROR}hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz \
+    && URL=http://mirror.jax.hugeserver.com/apache/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz \
     && curl ${URL} | tar -xzC /opt
 
 # Configure Hadoop

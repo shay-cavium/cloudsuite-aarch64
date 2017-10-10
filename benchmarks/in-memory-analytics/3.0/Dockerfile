@@ -1,4 +1,4 @@
-FROM cloudsuite/spark
+FROM ubuntu:spark
 
 # Benchmark files
 COPY movielens-als /root/movielens-als

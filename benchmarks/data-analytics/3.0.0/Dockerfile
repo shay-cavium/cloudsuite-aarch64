@@ -1,14 +1,17 @@
-FROM cloudsuite/hadoop
+FROM ubuntu:hadoop6
 
+RUN apt-get install -y curl
 ENV MAHOUT_VERSION 0.12.2
 ENV MAHOUT_HOME /opt/mahout-${MAHOUT_VERSION}
 
 # Install Mahout
 RUN set -x \
-    && MIRROR=$(curl -s http://www.apache.org/dyn/closer.lua?as_json=1 | grep preferred | awk '{print $2}' | sed -e 's/"//g') \
-    && URL=${MIRROR}mahout/${MAHOUT_VERSION}/apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz \
+    && URL=http://apache-mirror.rbc.ru/pub/apache/mahout/0.12.2/apache-mahout-distribution-0.12.2.tar.gz \
     && curl ${URL} | tar -xzC /opt \
     && mv /opt/apache-mahout-distribution-${MAHOUT_VERSION} ${MAHOUT_HOME}
+
+RUN apt-get update
+RUN apt-get install -y bzip2
 
 # Download dataset
 RUN curl https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles1.xml-p10p30302.bz2 | bunzip2 > /root/wiki
