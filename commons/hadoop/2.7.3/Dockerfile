@@ -9,14 +9,14 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends \
       ssh \
     && rm -rf /var/lib/apt/lists/*
 
-ENV HADOOP_VERSION 2.7.4
+ENV HADOOP_VERSION 2.7.3
 ENV HADOOP_PREFIX /opt/hadoop-${HADOOP_VERSION}
 ENV HADOOP_CONF_DIR ${HADOOP_PREFIX}/etc/hadoop
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-arm64
 
 # Install Hadoop
 RUN set -x \
-    && URL=http://mirror.jax.hugeserver.com/apache/hadoop/common/hadoop-2.7.4/hadoop-2.7.4.tar.gz \
+    && URL=ftp://apache.belnet.be/mirrors/ftp.apache.org/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz \
     && curl ${URL} | tar -xzC /opt
 
 # Configure Hadoop

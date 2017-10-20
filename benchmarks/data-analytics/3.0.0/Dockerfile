@@ -1,4 +1,4 @@
-FROM ubuntu:hadoop6
+FROM ubuntu:hadoop5
 
 RUN apt-get install -y curl
 ENV MAHOUT_VERSION 0.12.2
