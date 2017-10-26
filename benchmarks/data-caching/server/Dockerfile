@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM arm64v8/ubuntu
 MAINTAINER Arash Pourhabibi Zarandi <arash.pourhabibi@epfl.ch>
 
 # This is based on the official memcached Dockerfile
